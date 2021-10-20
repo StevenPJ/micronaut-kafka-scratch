@@ -1,0 +1,5 @@
+mainClassName = "uk.mettle.Application"
+
+dependencies {
+    implementation("io.micronaut.kafka:micronaut-kafka")
+}

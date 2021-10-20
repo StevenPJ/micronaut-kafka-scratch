@@ -1,0 +1,3 @@
+rootProject.name = 'micronuat-kafka-scratch'
+include 'kafka-consumer'
+include 'kafka-producer'

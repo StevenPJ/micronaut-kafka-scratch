@@ -1,0 +1,5 @@
+micronaut:
+  application:
+    name: kafkaMicroserviceExample
+
+kafka.bootstrap.servers: "broker:29092"

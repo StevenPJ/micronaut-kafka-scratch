@@ -1,0 +1,8 @@
+dependencies {
+    implementation("io.micronaut.kafka:micronaut-kafka")
+    implementation("io.micronaut.kafka:micronaut-kafka-streams")
+}
+
+mainClassName = "uk.mettle.Application"
+
+

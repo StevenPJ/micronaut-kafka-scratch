@@ -1,0 +1,49 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "6.1.0" apply false
+    id "io.micronaut.application" version "2.0.6" apply false
+}
+
+subprojects {
+    apply plugin: "com.github.johnrengelman.shadow"
+    apply plugin: "io.micronaut.application"
+
+    group 'uk.mettle'
+    version '1.0.0'
+
+    sourceCompatibility = 11
+
+    micronaut {
+        runtime("netty")
+        testRuntime("junit5")
+        processing {
+            incremental(true)
+            annotations("uk.mettle.*")
+        }
+    }
+
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+
+    configurations {
+        javaAgent
+    }
+
+    dependencies {
+        annotationProcessor("io.micronaut:micronaut-http-validation")
+        implementation("io.micronaut:micronaut-http-client")
+        implementation("io.micronaut:micronaut-runtime")
+        implementation("javax.annotation:javax.annotation-api")
+        runtimeOnly("ch.qos.logback:logback-classic")
+        implementation("io.micronaut:micronaut-validation")
+        javaAgent "io.opentelemetry.javaagent:opentelemetry-javaagent:1.6.2:all"
+    }
+
+    task("downloadJavaAgents", type: Copy) {
+        from configurations.javaAgent
+        into "${buildDir}/javaAgents"
+    }
+    assemble.dependsOn downloadJavaAgents
+
+}
